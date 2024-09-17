@@ -2,8 +2,9 @@ const express = require('express')
 const router = express.Router()
 const fileController = require('../controllers/fileController')
 const { authenticate, authorizeFileAccess } = require('../middleware/auth')
+const upload = require('../config/upload')
 
-router.post('/upload', authenticate, fileController.uploadFile)
+router.post('/upload', authenticate, upload.single('file'), fileController.uploadFile)
 
 router.get('/list', authenticate, fileController.listFiles)
 

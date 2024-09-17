@@ -1,14 +1,15 @@
-// middleware/auth.js
 const jwt = require('jsonwebtoken')
+const User = require('../models/User')
 const File = require('../models/File')
 
-const authenticate = (req, res, next) => {
+const authenticate = async (req, res, next) => {
     const token = req.header('Authorization')?.replace('Bearer ', '')
     if (!token) return res.status(401).json({ message: 'No token provided' })
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET)
-        req.user = decoded
+        req.user = await User.findById(decoded.id)
+        if (!req.user) return res.status(401).json({ message: 'User not found' })
         next()
     } catch (err) {
         res.status(401).json({ message: 'Invalid token' })
@@ -20,7 +21,7 @@ const authorizeFileAccess = async (req, res, next) => {
         const file = await File.findById(req.params.id)
         if (!file) return res.status(404).json({ message: 'File not found' })
 
-        if (file.uploadedBy.toString() !== req.user.id) {
+        if (file.uploadedBy.toString() !== req.user._id.toString()) {
             return res.status(403).json({ message: 'Not authorized to access this file' })
         }
 

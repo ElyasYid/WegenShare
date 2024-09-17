@@ -12,7 +12,7 @@ exports.uploadFile = async (req, res) => {
             filename: req.file.filename,
             filepath: req.file.path,
             filesize: req.file.size,
-            uploadedBy: req.user._id,
+            uploadedBy: req.user._id
         })
 
         await file.save()
@@ -41,12 +41,12 @@ exports.downloadFile = async (req, res) => {
         }
 
         if (file.uploadedBy.toString() !== req.user.id) {
-            return res.status(403).json({ message: 'Not authorized to access this file' });
+            return res.status(403).json({ message: 'Not authorized to access this file' })
         }
 
-        res.download(file.filepath, file.filename);
+        res.download(file.filepath, file.filename)
     } catch (error) {
-        res.status(500).json({ message: 'Error downloading file', error });
+        res.status(500).json({ message: 'Error downloading file', error })
     }
 }
 
