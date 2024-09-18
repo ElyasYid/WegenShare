@@ -18,6 +18,18 @@ const fileSchema = new mongoose.Schema({
         ref: 'User',
         required: true,
     },
+    sharedWith: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }],
+    token: {
+        type: String,
+        unique: true,
+        sparse: true
+    },
+    expiresAt: {
+        type: Date
+    },
     createdAt: {
         type: Date,
         default: Date.now,
