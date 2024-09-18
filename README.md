@@ -1,121 +1,154 @@
-WegenShare
-Overview
+# WegenShare
+
+## Overview
+
 WegenShare is a file-sharing platform that allows users to upload, download, list, delete, and share files. It includes user registration, login, and account management features. This project uses Node.js, Express.js, and MongoDB for backend development.
 
-Features
-User registration and login
-File upload, download, list, delete
-Generate shareable links for files
-Share files with other users
-User logout and account deletion
-Tech Stack
-Backend: Node.js, Express.js
-Database: MongoDB
-Authentication: JWT
-Cloud Storage: AWS S3 (optional)
-Project Management: Trello, GitHub
-Installation
-Clone the repository:
+## Features
 
-bash
-Copy code
-git clone <repository-url>
-cd <repository-directory>
-Install dependencies:
+- User registration and login
+- File upload, download, list, delete
+- Generate shareable links for files
+- Share files with other users
+- User logout and account deletion
 
-bash
-Copy code
-npm install
-Create a .env file in the root directory of the project and add the following environment variables:
+## Tech Stack
 
-makefile
-Copy code
-DB_URI=<your-mongodb-uri>
-JWT_SECRET=<your-jwt-secret>
-Run the application:
+- **Backend:** Node.js, Express.js
+- **Database:** MongoDB
+- **Authentication:** JWT
+- **Cloud Storage:** AWS S3 (optional)
+- **Project Management:** Trello, GitHub
 
-bash
-Copy code
-npm start
-API Endpoints
-User Authentication
-Register a user
+## Installation
 
-Endpoint: POST /api/auth/register
+1. **Clone the repository:**
 
-Request body:
+    ```bash
+    git clone <repository-url>
+    cd <repository-directory>
+    ```
 
-json
-Copy code
-{
-  "username": "string",
-  "email": "string",
-  "password": "string"
-}
-Login a user
+2. **Install dependencies:**
 
-Endpoint: POST /api/auth/login
+    ```bash
+    npm install
+    ```
 
-Request body:
+3. **Create a `.env` file** in the root directory of the project and add the following environment variables:
 
-json
-Copy code
-{
-  "email": "string",
-  "password": "string"
-}
-Logout a user
+    ```
+    DB_URI=<your-mongodb-uri>
+    JWT_SECRET=<your-jwt-secret>
+    ```
 
-Endpoint: POST /api/auth/logout
-Headers:
-Authorization: Bearer <token>
-Delete user account
+4. **Run the application:**
 
-Endpoint: DELETE /api/auth/delete
-Headers:
-Authorization: Bearer <token>
-File Management
-Upload a file
+    ```bash
+    npm start
+    ```
 
-Endpoint: POST /api/files/upload
-Headers:
-Authorization: Bearer <token>
-Form-data:
-file: <file>
-List files
+## API Endpoints
 
-Endpoint: GET /api/files/list
-Headers:
-Authorization: Bearer <token>
-Download a file
+### User Authentication
 
-Endpoint: GET /api/files/download/:id
-Headers:
-Authorization: Bearer <token>
-Delete a file
+- **Register a user**
 
-Endpoint: DELETE /api/files/delete/:id
-Headers:
-Authorization: Bearer <token>
-Generate shareable link
+  - **Endpoint:** `POST /api/auth/register`
+  - **Request body:**
 
-Endpoint: POST /api/files/share/link/:id
-Headers:
-Authorization: Bearer <token>
-Share file with users
+    ```json
+    {
+      "username": "string",
+      "email": "string",
+      "password": "string"
+    }
+    ```
 
-Endpoint: POST /api/files/share/user/:id
+- **Login a user**
 
-Headers:
+  - **Endpoint:** `POST /api/auth/login`
+  - **Request body:**
 
-Authorization: Bearer <token>
-Request body:
+    ```json
+    {
+      "email": "string",
+      "password": "string"
+    }
+    ```
 
-json
-Copy code
-{
-  "userIds": ["userId1", "userId2"]
-}
+- **Logout a user**
 
-License
-This project is licensed under the MIT License - see the LICENSE file for details.
+  - **Endpoint:** `POST /api/auth/logout`
+  - **Headers:**
+    - `Authorization: Bearer <token>`
+
+- **Delete user account**
+
+  - **Endpoint:** `DELETE /api/auth/delete`
+  - **Headers:**
+    - `Authorization: Bearer <token>`
+
+### File Management
+
+- **Upload a file**
+
+  - **Endpoint:** `POST /api/files/upload`
+  - **Headers:**
+    - `Authorization: Bearer <token>`
+  - **Form-data:**
+    - `file: <file>`
+
+- **List files**
+
+  - **Endpoint:** `GET /api/files/list`
+  - **Headers:**
+    - `Authorization: Bearer <token>`
+
+- **Download a file**
+
+  - **Endpoint:** `GET /api/files/download/:id`
+  - **Headers:**
+    - `Authorization: Bearer <token>`
+
+- **Delete a file**
+
+  - **Endpoint:** `DELETE /api/files/delete/:id`
+  - **Headers:**
+    - `Authorization: Bearer <token>`
+
+- **Generate shareable link**
+
+  - **Endpoint:** `POST /api/files/share/link/:id`
+  - **Headers:**
+    - `Authorization: Bearer <token>`
+
+- **Share file with users**
+
+  - **Endpoint:** `POST /api/files/share/user/:id`
+  - **Headers:**
+    - `Authorization: Bearer <token>`
+  - **Request body:**
+
+    ```json
+    {
+      "userIds": ["userId1", "userId2"]
+    }
+    ```
+
+## Troubleshooting
+
+- **Failed Deployment:** Ensure all environment variables are correctly set and the `.env` file is properly configured.
+- **Authentication Issues:** Verify that the JWT_SECRET matches across your application and that tokens are valid.
+
+## Contributing
+
+Feel free to open issues or submit pull requests if you want to contribute to the project.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Authors
+
+- **Elias Yidnekachew** - www.github.com/ElyasYid
